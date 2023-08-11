@@ -91,4 +91,34 @@ struct Divs {
         if (l > r)  swap(l, r);
         return ((ll)(sqrtl(r)) - ceil(sqrtl(l)) + 1);
     }
+
+
+    // phi(N) -> count how many numbers x less than n and gcd(x, n) == 1 (Co-prime)
+    ll phi(ll num) {
+        ll ph = 1, curFq = 0;
+    
+        if (num % 2 == 0){
+            curFq = 0;
+            while (num % 2 == 0)    curFq++, num /= 2;
+            ph *= powl(2, curFq) - powl(2, curFq - 1);
+        }
+    
+        for (int i = 3; i <= sqrt(num); i += 2)
+            if (num % i == 0){
+                curFq = 0;
+                while (num % i == 0)    curFq++, num /= i;
+                ph *= powl(i, curFq) - powl(i, curFq - 1);
+            }
+        
+        if (num > 2)
+            ph *= num - 1;
+        
+        return ph;
+    }
+
+    // n! % p^x  -> We wanna find the larest x   
+    ll largest_power_divFactoN(ll n, ll p) {
+        return n ? n / p + largest_power_divFactoN(n / p, p) : 0;
+    }
+
 };
