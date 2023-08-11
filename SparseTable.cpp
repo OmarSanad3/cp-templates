@@ -2,18 +2,34 @@
 
 using namespace std;
 
-#define cin2d(_$)for(auto&$:_$)for(auto&_:$)cin>>_;
-#define cout2d(_$)for(auto&$:_$){for(auto &_:$)cout<<_<<" ";cout<<"\n";}
-#define cout_map(_$) for(auto&[$,_]:_$)cout<<$<<" "<<_<<"\n";
-#define cin(_$)for(auto&_:_$)cin >> _;
-#define cout(_$){for(auto&_:_$)cout<<_ <<" ";cout<<"\n";}
-#define all(_$) _$.begin(), _$.end()
-#define unq(_$){sort(all(_$));_$.resize(unique(all(_$))-_$.begin());}
-#define dg($$)  cout << #$$ << ": " << ($$) << "\n"
+#define cout_2d(vec,n,m)for(int Ii=0;Ii<n;Ii++,cout<<"\n")for(int Jj=0;Jj<m&&cout<<vec[Ii][Jj]<<" ";Jj++);
+#define cin_2d(vec,n,m)for(int iii=0;iii<n;iii++)for(int jjj=0;jjj<m&&cin>>vec[iii][jjj];jjj++);
+#define cout_map(mp) for(auto& [fff, sss] : mp) cout << fff << "  " << sss << "\n";
+#define cout(vec) for(auto& iii : vec) cout << iii << " "; cout << "\n";
+#define cin(vec) for(auto& iii : vec) cin >> iii
+#define to_decimal(bin) stoll(bin, nullptr, 2)
+#define unq(VEC) sort(all(VEC)); VEC.resize(unique(all(VEC)) - VEC.begin());
+#define ll long long
 #define myCeil(N, M) ((N) / (M) + !!((N) % (M)))
-#define sz(_$) (int)(_$.size())
-typedef long long ll;
-constexpr int MOD = 1e9 + 7; constexpr double EPS = 1e-9;
+#define dg(DG)   cout << #DG << ": " << (DG) << "\n"
+#define dg1(DG) cout << #DG << ": " << (DG) << " || ";
+#define dg3(DG1,DG2,DG3) {dg2(DG1, DG2) dg1(DG3)}
+#define dg2(DG1, DG2) {dg1(DG1) dg1(DG2)}
+#define dg4(DG1,DG2,DG3,DG4) {dg3(DG1,DG2,DG3) dg1(DG4)}
+#define sz(x) (int)(x.size())
+#define all(vec) vec.begin(), vec.end()
+#define rall(vec) vec.rbegin(), vec.rend()
+#define ff first
+#define ss second
+#define el "\n"
+constexpr long long OO = 1 << 30, OOL = 1LL << 60, MOD = 1e9 + 7;
+constexpr double EPS = 1e-9;
+string get_binary(long long num){if(!num)return"";return get_binary(num/2)+(num%2?"1":"0");}
+bool is_subseq(string p, string w){int szp = p.size(), szw = w.size(), ip=0, iw=0;
+for (; ip < szp && iw < szw; iw++){if (p[ip] == w[iw]){ip++;}}  return ip == szp;}
+vector<pair<int,int>>dxy4={{1,0},{0,1},{0,-1},{-1,0}};
+vector<pair<int,int>>dxy8={{1,-1}, {0,-1}, {-1,-1}, {1,0}, {-1,0}, {1,1}, {0,1}, {-1,1}};
+vector<pair<int,int>>dxyk={{-1,-2}, {-2,-1}, {1,-2}, {2,-1}, {-2,1}, {-1,2}, {1,2}, {2,1}};
 
 enum TYPE {MIN, MAX, SUM, GCD};
 template <typename T, int Q_BASE, TYPE queryType> struct Sparse {
@@ -32,7 +48,10 @@ template <typename T, int Q_BASE, TYPE queryType> struct Sparse {
         return a + b;
     }
 
+    int n = 0;
+
     void preCalc(int n) {
+        this->n = n;
         for (int i = 0; i < n; i++)
             Sparse::table[i][0] = Sparse::arr[i];
         for (int j = 1; j < __lg(n) + 1; j++)
