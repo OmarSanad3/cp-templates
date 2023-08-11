@@ -1,5 +1,10 @@
 struct Divs {
 
+    ll sum_n(ll n) {return n * (n + 1) / 2;}
+    ll sum_n_2(ll n) {return n * (n + 1) * (2 * n + 1) / 6;}
+    ll sum_n_3(ll n) {return n * n * (n + 1) * (n + 1) / 4;}
+
+
     /* Check whether a number is Prime or not in O(log(N))  */
     bool is_prime(ll Number){
         if(Number < 2 || (Number % 2 == 0 && Number != 2)) return false;
