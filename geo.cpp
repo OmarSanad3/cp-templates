@@ -75,6 +75,48 @@ vector < pair <int, int> > dxy8 = {{1, -1}, {0, -1}, {-1, -1}, {1, 0}, {-1, 0}, 
 vector < pair <int, int> > dxyk = {{-1, -2}, {-2, -1}, {1, -2}, {2, -1}, {-2, 1}, {-1, 2}, {1, 2}, {2, 1}};
 //----------------------------------------------CODE___HERE----------------------------------------------
 
+ld SectorArea(ld r, ld angle) { // مساحة القطاع الدائري
+    0.5 * r * r * angle;
+}
+
+ld PiceArea(ld r, ld angle) {   // مساحة القطعة الدائرية
+    ld TriangleArea = 0.5 * r * r * sin(angle);
+    return SectorArea(r, angle) - TriangleArea;
+}
+
+ld areaOfRegPolygon(ld n, ld sideLen) {
+    return n * sideLen * sideLen * 0.25 * (1 / tan(PI / n));
+}
+
+double Rad(double deg)
+{
+    return (deg * PI) / 180.0;
+}
+double Deg(double rad)
+{
+    return (rad * 180) / PI;
+}
+
+double fixAngle(double An)
+{
+    return An > 1 ? 1 : (An < -1 ? -1 : An);
+}
+
+double getSide_a_bAB(double b, double A, double B)
+{
+    return (b * sin(A)) / sin(B);
+}
+
+double getAngle_A_abB(double a, double b, double B)
+{
+    return asin(fixAngle((a * sin(B)) / b));
+}
+
+double getAngle_A_abc(double a, double b, double c)
+{
+    return acos(fixAngle((a * a - b * b - c * c) / (-2 * b * c)));
+}
+
 
 
 //-------------------------------------------------------------------------------------------------------
